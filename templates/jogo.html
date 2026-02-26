@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG - Eldrath</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dado.css') }}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-fantasy {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Estilo para a letra capitular da narrativa */
+        .capitular::first-letter {
+            float: left;
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            line-height: 1;
+            padding-right: 12px;
+            color: #a855f7;
+            font-weight: bold;
+        }
+
+        /* Efeito de brilho suave para containers importantes */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#0f0c1d] text-gray-200 min-h-screen flex items-center justify-center p-4 sm:p-8 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-[#1e1b4b] via-[#0f0c1d] to-[#020617]">
+
+    <div class="w-full max-w-4xl mx-auto space-y-6">
+
+        <!-- HUD / STATUS BAR (ESTILO REFINADO) -->
+        <header
+            class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-2xl">
+            <!-- HP -->
+            <div class="space-y-1">
+                <div
+                    class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-red-400 font-fantasy">
+                    <span>❤️ Vitalidade</span>
+                    <span>{{ session.personagem.hp }}/100</span>
+                </div>
+                <div class="w-full bg-gray-900 rounded-full h-2 overflow-hidden border border-white/5">
+                    <div class="bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500"
+                        style="width: {{ session.personagem.hp }}%"></div>
+                </div>
+            </div>
+
+            <!-- Atributos -->
+            <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                <span class="text-xl">⚔️</span>
+                <div>
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Ataque</p>
+                    <p class="font-fantasy text-purple-300 text-sm">{{ session.personagem.ataque if
+                        session.personagem.ataque else "0" }}</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                <span class="text-xl">🛡️</span>
+                <div>
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Defesa</p>
+                    <p class="font-fantasy text-blue-300 text-sm">{{ session.personagem.defesa if
+                        session.personagem.defesa else "0" }}</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-2 border-l border-white/10 truncate">
+                <span class="text-xl">🗡️</span>
+                <div class="truncate">
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Equipamento
+                    </p>
+                    <p class="font-fantasy text-amber-400 truncate text-xs">
+                        {{ session.personagem.arma if session.personagem.arma else "Nenhum" }}
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTAINER PRINCIPAL -->
+        <main class="relative group">
+            <!-- Moldura Mágica -->
+            <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-3xl blur opacity-75">
+            </div>
+
+            <div
+                class="relative bg-[#161426]/90 backdrop-blur-xl rounded-2xl p-8 md:p-12 shadow-inner border border-white/10 glow-effect">
+
+                <!-- ================= CENA 1 ================= -->
+                <section id="cena1" class="{% if cena and cena != 1 %}hidden{% endif %} space-y-8">
+                    <h2
+                        class="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 tracking-tight font-fantasy">
+                        Ecos na Floresta de Eldrath
+                    </h2>
+                    <article class="space-y-6 text-lg text-gray-300 leading-relaxed font-light">
+                        <p class="capitular">Desde que o Coração Arcano se partiu, sua vida nunca mais foi a mesma.
+                            Vilas desapareceram sob a névoa, estradas tornaram-se trilhas de perigo e o próprio ar vibra
+                            com magia instável.</p>
+                        <p>Você não é um herói lendário — <span
+                                class="text-purple-400 italic font-semibold">ainda</span>. É apenas alguém tentando
+                            sobreviver em um mundo onde os fragmentos espalhados prometem poder… ou destruição absoluta.
+                        </p>
+                        <div
+                            class="bg-purple-900/20 border-l-4 border-purple-500 p-4 rounded-r-lg italic text-gray-400 text-sm">
+                            "Algo desperta nas florestas ao norte. Animais fogem. A terra pulsa à noite e luzes
+                            estranhas brilham entre as árvores."
+                        </div>
+                        <p class="font-semibold text-white">Movido por necessidade, curiosidade ou ambição, você decide
+                            atravessar a fronteira da floresta.</p>
+                    </article>
+                    <div class="mt-10">
+                        <a href="/jogo/2"
+                            class="inline-flex items-center px-8 py-4 bg-purple-600 hover:bg-purple-500 font-fantasy rounded-xl text-white shadow-[0_0_20px_rgba(147,51,234,0.3)] transition group">
+                            <span class="self-center">Avançar para a Floresta</span>
+                            <svg class="w-5 h-5 ml-3 transition-transform group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- ================= CENA 2 ================= -->
+                <section id="cena2" class="{% if cena != 2 %}hidden{% endif %} space-y-8">
+                    <h2
+                        class="text-3xl md:text-5xl font-bold font-fantasy bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">
+                        Uma Descoberta</h2>
+                    <p class="text-lg text-gray-300 leading-relaxed font-light">Ao adentrar a floresta de Eldrath, algo
+                        brilha sob as folhas
+                        mortas... Uma <strong class="text-amber-400 font-fantasy uppercase tracking-tighter">Espada
+                            Longa</strong> esquecida pelo tempo.</p>
+                    <div class="flex flex-col   sm:flex-row gap-4 justify-center text-center">
+                        <button onclick="equiparArma()"
+                            class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 font-fantasy rounded-xl text-white shadow-lg transition">Equipar</button>
+                        <a href="/jogo/3"
+                            class="px-8 py-4 bg-gray-700 hover:bg-gray-600 font-fantasy rounded-xl text-white transition text-sm">
+                            Ignorar
+                        </a>
+                    </div>
+                </section>
+
+                <!-- ================= CENA 3 ================= -->
+                <section id="cena3" class="{% if cena != 3 %}hidden{% endif %} space-y-8">
+                    <h2 class="text-3xl md:text-5xl font-bold text-red-500 font-fantasy">Um Encontro Sombrio</h2>
+                    <p class="text-lg text-gray-400 italic border-l-2 border-red-500/50 pl-4">
+                        A floresta silencia. Algo observa você entre as sombras...
+                    </p>
+
+                    <div
+                        class="grid md:grid-cols-2 gap-8 items-start bg-black/30 p-6 rounded-2xl border border-white/5">
+                        <div class="space-y-4">
+                            <h3 class="text-2xl font-fantasy text-purple-300">{{ monstro.name if monstro else "Criatura
+                                Desconhecida" }}</h3>
+                            <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl">
+                                <!-- Imagem do Monstro -->
+                                <img src="/static/images/monstro.png"
+                                    class="w-full h-64 object-cover grayscale-[0.3] hover:grayscale-0 transition duration-500">
+                            </div>
+                        </div>
+
+                        <!-- Tabela de Atributos Traduzida -->
+                        <div class="space-y-3 bg-white/5 p-4 rounded-xl text-[13px] font-medium">
+                            {% if monstro %}
+                            <div class="flex justify-between border-b border-white/5 pb-1">
+                                <span class="text-gray-500 font-fantasy uppercase text-[10px]">Espécie</span>
+                                <span>{{ monstro.type }}</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/5 pb-1">
+                                <span class="text-gray-500 font-fantasy uppercase text-[10px]">Tamanho</span>
+                                <span>{{ monstro.size }}</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/5 pb-1">
+                                <span class="text-gray-500 font-fantasy uppercase text-[10px]">Alinhamento</span>
+                                <span>{{ monstro.alignment }}</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/5 pb-1">
+                                <span class="text-gray-500 font-fantasy uppercase text-[10px]">Pontos de Vida</span>
+                                <span class="text-red-400 font-bold font-fantasy">{{ monstro.hp }} HP</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500 font-fantasy uppercase text-[10px]">Ameaça</span>
+                                <span class="text-amber-400 font-fantasy">ND {{ monstro.cr }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/jogo/4"
+                            class="px-8 py-4 bg-red-700 hover:bg-red-600 font-fantasy rounded-xl text-white shadow-xl transition text-center tracking-wider">
+                            Iniciar Combate
+                        </a>
+                        <button onclick="tentarFugir()"
+                            class="px-8 py-4 bg-gray-800 hover:bg-gray-700 font-fantasy rounded-xl text-white transition text-sm">
+                            Tentar Fugir
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ================= CENA 4 ================= -->
+                <section id="cena4" class="{% if cena != 4 %}hidden{% endif %} text-center space-y-10">
+                    <h2
+                        class="text-3xl md:text-5xl font-bold font-fantasy bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">
+                        O Destino é Decidido</h2>
+                    <div id="telaDado" class="flex flex-col items-center gap-8 py-10">
+                        <div class="relative group">
+                            <div class="absolute -inset-8 bg-purple-600 blur-3xl opacity-20 animate-pulse"></div>
+                            <div id="dado"
+                                class="relative w-32 h-32 md:w-44 md:h-44 bg-gradient-to-br from-purple-800 to-indigo-950 flex items-center justify-center text-5xl md:text-7xl font-bold font-fantasy rounded-2xl border-2 border-purple-400/30 shadow-[0_0_50px_rgba(147,51,234,0.2)]">
+                                <span id="valor-dado" class="text-white drop-shadow-md">?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="telaResultado" class="hidden space-y-6">
+                        <p id="mensagemResultado" class="text-2xl font-fantasy text-purple-300"></p>
+                        <a href="/jogo/5"
+                            class="inline-block px-10 py-4 bg-emerald-600 hover:bg-emerald-500 font-fantasy rounded-xl text-white shadow-lg transition">Continuar
+                            Jornada</a>
+                    </div>
+                </section>
+
+                <!-- ================= CENA 5 ================= -->
+                <section id="cena5" class="{% if cena != 5 %}hidden{% endif %} text-center space-y-8">
+                    <h2 class="text-3xl md:text-5xl font-bold font-fantasy text-amber-400">O Fragmento Desperta</h2>
+                    <div class="space-y-6 text-lg text-gray-300 leading-relaxed font-light">
+                        <p>Após o confronto, algo brilha entre os restos da batalha... Um fragmento arcano pulsa ao
+                            toque da sua mão.</p>
+                        <p class="text-xs text-gray-500 italic font-fantasy uppercase tracking-widest">Equipado: {{
+                            session.personagem.arma or "Nenhum" }}</p>
+                        <a href="/jogo/6"
+                            class="inline-block px-10 py-4 bg-emerald-600 hover:bg-emerald-500 font-fantasy rounded-xl text-white shadow-xl transition">Reivindicar
+                            Fragmento</a>
+                        <p id="resultadoResistencia" class="mt-4 text-xl font-fantasy text-purple-400"></p>
+                    </div>
+                </section>
+
+                <!-- ================= CENA 6 ================= -->
+                <section id="cena6" class="{% if cena != 6 %}hidden{% endif %} space-y-8">
+                    <h2
+                        class="text-3xl md:text-5xl font-bold font-fantasy bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500">
+                        Algo Despertou</h2>
+                    <article class="space-y-6 text-lg text-gray-300 leading-relaxed font-light">
+                        <p class="capitular text-white font-bold">O fragmento queima em sua mão — não como fogo, mas
+                            como algo vivo… algo consciente. Por um instante, sua visão falha.</p>
+                        <div
+                            class="bg-black/40 border border-white/5 p-6 rounded-xl italic text-gray-400 text-center text-base">
+                            "Você vê ruínas antigas. Céus rasgados. Uma silhueta colossal observando o mundo do alto."
+                        </div>
+                        <p class="text-center">Então a visão desaparece subitamente.</p>
+                        <p
+                            class="font-fantasy text-xl text-purple-400 text-center border-t border-white/10 pt-8 uppercase tracking-[0.2em] animate-pulse">
+                            Em algum lugar de Eldrath, algo sentiu sua presença.
+                        </p>
+                    </article>
+                    <div class="mt-10 flex justify-center">
+                        <a href="{{ url_for('jogo') }}"
+                            class="px-10 py-4 border border-purple-500/50 hover:bg-purple-500/10 font-fantasy rounded-xl text-white transition tracking-widest text-sm">
+                            Encerrar Prólogo
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <footer class="text-center text-gray-600 text-[10px] uppercase tracking-[0.5em] py-6 font-fantasy">
+            Eldrath • Crônicas do Coração Arcano
+        </footer>
+
+    </div>
+
+    <script>const cenaAtual = {{ cena | tojson }};</script>
+    <script src="{{ url_for('static', filename='javascript/jogo.js') }}"></script>
+
+</body>
+
+</html>

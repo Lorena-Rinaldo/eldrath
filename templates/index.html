@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eldrath - Crônicas do Coração Arcano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-fantasy {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Efeito de fade para as seções */
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0) 60%, rgba(2, 6, 23, 1) 100%);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Animação suave para o botão */
+        .btn-pulse:hover {
+            box-shadow: 0 0 30px rgba(147, 51, 234, 0.6);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body class="text-gray-200 overflow-x-hidden">
+
+    <!-- HEADER GLASSMORPHISM -->
+    <header class="w-full bg-black/20 backdrop-blur-lg border-b border-white/5 p-5 fixed top-0 z-50">
+        <div
+            class="flex justify-between items-center max-w-7xl mx-auto uppercase tracking-widest text-[10px] font-bold">
+            <h1 class="text-xl md:text-2xl font-fantasy text-white tracking-widest">Eldrath</h1>
+
+            <nav class="flex items-center gap-8">
+                <a href="{{ url_for('jogo') }}"
+                    class="btn-pulse bg-purple-600 text-white font-fantasy px-6 py-2 rounded-full transition-all duration-300">
+                    Jogar Agora
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- SEÇÃO HERO (O IMPACTO) -->
+        <section class="relative h-screen w-full flex flex-col items-center justify-center text-center px-6"
+            style="background-image: url('../static/images/fundo1.png'); background-size: cover; background-position: center;">
+
+            <!-- Overlay escuro e degradê inferior -->
+            <div class="absolute inset-0 bg-black/40 hero-gradient"></div>
+
+            <div class="relative z-10 space-y-4 max-w-4xl">
+                <h2 class="text-purple-400 font-bold uppercase tracking-[0.5em] text-xs md:text-sm animate-pulse">
+                    O Coração Arcano se Partiu
+                </h2>
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-black text-white leading-tight font-fantasy text-glow">
+                    História de <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">Eldrath</span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-light leading-relaxed">
+                    Um mundo em pedaços aguarda por quem ouse atravessar as sombras das florestas esquecidas.
+                </p>
+                <div class="pt-8">
+                    <a href="#lore"
+                        class="inline-block border-b-2 border-purple-500 pb-1 text-sm uppercase tracking-widest font-bold hover:text-purple-400 transition">
+                        Descobrir a Lenda ↓
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO LORE (TEXTO QUEBRADO EM BLOCOS) -->
+        <section id="lore" class="py-24 px-6 md:px-12 lg:px-24 max-w-5xl mx-auto space-y-24">
+
+            <!-- Bloco 1 -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-fantasy text-purple-300">O Amanhecer de Cristal</h3>
+                    <p class="text-lg leading-relaxed text-gray-400 font-light">
+                        Há mil anos, o mundo era uno. O <span class="text-white">Coração Arcano</span> sustentava reinos
+                        e florestas conscientes.
+                        As cidades brilhavam com torres de cristal vivo, alimentadas por correntes de magia pura.
+                    </p>
+                </div>
+                <div class="rounded-2xl border border-white/10 p-2 bg-white/5">
+                    <div class="bg-gray-800 h-64 rounded-xl flex items-center justify-center italic text-gray-500">
+                        <img src="../static/images/cidade_cristal.png" alt="Arte Conceitual: A Cidade de Cristal">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco 2 - Citacão Central -->
+            <div class="text-center py-12 border-y border-purple-500/20">
+                <blockquote class="text-2xl md:text-4xl font-fantasy italic text-white/90">
+                    "Mas o poder que une também pode dividir."
+                </blockquote>
+            </div>
+
+            <!-- Bloco 3 -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="rounded-2xl border border-white/10 p-2 bg-white/5 md:order-1">
+                    <div class="bg-gray-800 h-64 rounded-xl flex items-center justify-center italic text-gray-500">
+                        <img src="../static/images/caos_arcano.png" alt="Arte Conceitual: O Caos Arcano">
+                    </div>
+                </div>
+                <div class="space-y-6 md:order-2">
+                    <h3 class="text-3xl font-fantasy text-purple-300">A Grande Ruptura</h3>
+                    <p class="text-lg leading-relaxed text-gray-400 font-light">
+                        Quando o Coração se partiu, o solo rachou como vidro. Mares recuaram e a magia tornou-se
+                        imprevisível, selvagem, quase viva.
+                        Fragmentos permanecem espalhados; alguns irradiam esperança, outros sussurram promessas
+                        perigosas.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chamada Final -->
+            <div class="bg-transparent p-12 rounded-3xl text-center space-y-8">
+                <p class="text-2xl md:text-3xl font-fantasy text-white leading-snug">
+                    Agora, os fragmentos começam a despertar novamente. <br>
+                    <span class="text-purple-400">Algo antigo observa das sombras.</span>
+                </p>
+                <a href="{{ url_for('jogo') }}"
+                    class="inline-block px-12 py-5 bg-purple-600 hover:bg-purple-500 text-white font-fantasy text-xl rounded-xl btn-pulse transition-all">
+                    Iniciar sua Jornada
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer class="py-12 px-6 border-t border-white/5 bg-black/20 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+
+            <!-- Lado Esquerdo: Marca -->
+            <div class="text-center md:text-left space-y-1">
+                <h4 class="font-fantasy text-white tracking-[0.3em] text-sm">Eldrath RPG</h4>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest">© 2026 • Crônicas do Coração Arcano</p>
+            </div>
+
+            <!-- Lado Direito: Desenvolvedora -->
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold">Desenvolvido por</span>
+                <a href="https://www.linkedin.com/in/lorena-rinaldo01" target="_blank"
+                    class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-purple-600/20 hover:border-purple-500/50 transition-all duration-300 group">
+                    <span class="text-xs font-fantasy tracking-wider text-gray-300 group-hover:text-purple-400">Lorena
+                        Rinaldo</span>
+                    <!-- Ícone LinkedIn (SVG) -->
+                    <svg class="w-4 h-4 fill-current text-gray-500 group-hover:text-purple-400" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+</body>
+
+</html>

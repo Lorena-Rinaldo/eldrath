@@ -1,0 +1,124 @@
+                  <p class="mt-4">✝️ Clã do Clérigo — A Ordem da Chama Sagrada <br>
+
+                        Devotos de uma luz que pode já não existir, os Clérigos acreditam que os fragmentos do Coração
+                        Arcano
+                        devem ser reunidos — mas sob controle divino.
+
+                        Motivação: restaurar a ordem
+                        Conflito: sua fé está começando a falhar
+                        Território: catedrais de Aurion
+                    <p>
+                    <p>
+                        🪓 Clã do Bárbaro — Filhos da Fúria Primordial <br>
+
+                        Nascidos nas terras selvagens do norte, os Bárbaros acreditam que a Fratura foi uma bênção. Para
+                        eles, a
+                        civilização é fraaca — e apenas a força bruta revela a verdade do mundo.
+
+                        Motivação: provar que a força governa tudo
+                        Símbolo: machado partido
+                        Território: tundras de Skarn
+                    </p>
+                    <p>
+                        ⚔️ Clã da Guerreira — Lâminas do Juramento<br>
+
+                        Disciplina, honra e aço. As Guerreiras formam o exército mais temido de Eldrath. Diferente dos
+                        Bárbaros,
+                        elas lutam com estratégia brutal.
+
+                        Motivação: manter o equilíbrio pela força
+                        Lema: "Sem ordem, só resta cinza."
+                        Território: fortalezas de ferro
+                    </p>
+                    <p>
+                        🧘 Clã do Monge — Punhos do Vazio Interior<br>
+
+                        Após a Fratura, alguns buscaram poder… outros buscaram controle. Os Monges canalizam energia
+                        interna
+                        que
+                        rivaliza com a própria magia arcana.
+
+                        Motivação: dominar corpo e espírito
+                        Mistério: alguns monges não envelhecem
+                        Território: templos nas montanhas
+                    </p>
+                    <p>
+                        🛡️ Clã do Paladino — Juramento da Aurora<br>
+
+                        Paladinos juraram proteger o mundo da corrupção dos fragmentos — mesmo que precisem destruir
+                        quem os
+                        use.
+
+                        Motivação: erradicar a corrupção
+                        Conflito interno: até onde vai a justiça?
+                        Território: bastiões sagrados
+                    </p>
+                    <p>
+                        🏹 Clã do Patrulheiro — Olhos da Fronteira<br>
+
+                        Eles viram primeiro.
+
+                        Criaturas estranhas surgiram após a Fratura, e os Patrulheiros vivem nas bordas do mundo
+                        civilizado
+                        caçando o que ninguém mais consegue.
+
+                        Motivação: manter os horrores longe
+                        Especialidade: caça de anomalias
+                        Território: fronteiras selvagens
+                    </p>
+                    <p>
+
+                        🗡️ Clã do Ladino — Sombras de Veyra<br>
+
+                        Onde há poder, há quem o roube. Os Ladinos sabem que os fragmentos valem mais que reinos
+                        inteiros.
+
+                        Motivação: lucro… ou algo mais?
+                        Rumor: eles já possuem um fragmento
+                        Território: submundo das grandes cidades
+                    </p>
+                    <p>
+                        🔮 Clã do Feiticeiro — Herdeiros do Sangue Arcano<br>
+
+                        A magia corre em suas veias — literalmente. Descendentes de seres tocados pela Fratura, os
+                        Feiticeiros
+                        são instáveis… e perigosos.
+
+                        Motivação: entender sua própria origem
+                        Risco: poder fora de controle
+                        Território: dispersos pelo mundo
+                    </p>
+                    <p>🎼 Clã do Bardo — Arautos da Última Canção<br>
+
+                        Os Bardos guardam memórias do mundo antes da Fratura. Suas músicas não são apenas arte — são
+                        magia
+                        viva
+                        capaz de alterar emoções, sorte… e às vezes a própria realidade.
+
+                        Motivação: preservar a história verdadeira
+                        Segredo: existe uma canção proibida
+                        Território: cidades livres</p>
+                    <p>📚 Clã do Mago — Arquitetos do Arcano<br>
+
+                        Os Magos acreditam que a Fratura foi apenas… um erro de cálculo. E erros podem ser corrigidos.
+
+                        Motivação: reconstruir o Coração Arcano
+                        Perigo: brincar de deuses
+                        Território: torres arcanas</p>
+                    <p>🌿 Clã do Druida — Guardiões do Véu Verde<br>
+
+                        Quando a Fratura aconteceu, a natureza despertou… e os Druidas ouviram seu chamado. Eles sabem
+                        que o
+                        mundo está vivo — e sofrendo.
+
+                        Motivação: impedir que a magia destrua a natureza
+                        Poder único: metamorfose instável
+                        Território: florestas conscientes de Thalen</p>
+                    <p>🌙 Clã da Bruxa — Pacto do Crepúsculo<br>
+
+                        As Bruxas não tomam poder — elas negociam por ele. Entidades antigas sussurram através da
+                        Fratura.
+
+                        Motivação: cumprir pactos desconhecidos
+                        Segredo: nem elas sabem o preço final
+                        Território: pântanos e ruínas</p>
