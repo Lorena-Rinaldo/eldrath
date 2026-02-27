@@ -11,7 +11,32 @@ headers = {"Accept": "application/json"}
 
 
 def criar_personagem_padrao():
-    return {"hp": 20, "ataque": 10, "defesa": 10, "arma": None, "nível": 1}
+    return {
+        "hp": 20,
+        "hp_max": 20,
+        "ataque": 10,
+        "defesa": 10,
+        "arma": None,
+        "nível": 1,
+    }
+
+
+def garantir_personagem_completo():
+    padrao = criar_personagem_padrao()
+
+    if "personagem" not in session or not isinstance(session["personagem"], dict):
+        session["personagem"] = padrao
+        return
+
+    personagem = session["personagem"]
+
+    # garante TODOS os campos
+    for chave, valor in padrao.items():
+        if chave not in personagem:
+            personagem[chave] = valor
+
+    session["personagem"] = personagem
+    session.modified = True
 
 
 # =========================
@@ -102,15 +127,15 @@ def home():
 
 @app.route("/jogo")
 def jogo():
-    session["personagem"] = criar_personagem_padrao()
+    if "personagem" not in session:
+        session["personagem"] = criar_personagem_padrao()
     session["monstro"] = pegar_monstro()
     return render_template("jogo.html", monstro=session["monstro"], cena=1)
 
 
 @app.route("/jogo/<int:cena>")
 def cenas(cena):
-    if "personagem" not in session or "ataque" not in session["personagem"]:
-        session["personagem"] = criar_personagem_padrao()
+    garantir_personagem_completo()
 
     monstro = session.get("monstro")
 
@@ -153,8 +178,14 @@ def fugir():
 
     if not sucesso:
         session["personagem"]["hp"] -= 5
+        session.modified = True
 
-    return {"dado": dado, "sucesso": sucesso, "hp": session["personagem"]["hp"]}
+    return {
+        "dado": dado,
+        "sucesso": sucesso,
+        "hp": session["personagem"]["hp"],
+        "hp_max": session["personagem"]["hp_max"],
+    }
 
 
 @app.route("/api/ataque-monstro", methods=["POST"])
@@ -166,7 +197,6 @@ def ataque_monstro():
 
     dado = random.randint(1, 20)
     acertou = dado >= personagem["defesa"]
-
     dano = random.randint(3, 8) if acertou else 0
 
     if acertou:
@@ -174,6 +204,7 @@ def ataque_monstro():
         personagem["hp"] = max(personagem["hp"], 0)
 
     session["personagem"] = personagem
+    session.modified = True
 
     return {
         "dado": dado,

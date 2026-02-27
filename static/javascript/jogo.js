@@ -21,10 +21,7 @@ function tentarFugir() {
                 const msg = document.getElementById("mensagemResultado");
                 document.getElementById("valor-dado").textContent = data.dado;
 
-                // ⭐ AQUI — logo após receber os dados
-                if (!data.sucesso && data.hp !== undefined) {
-                    atualizarHP(data.hp);
-                }
+                sincronizarPersonagem(data);
 
                 msg.textContent = data.sucesso
                     ? "🏃 Escapou!"
@@ -40,16 +37,24 @@ function equiparArma() {
         .then(() => { window.location.href = "/jogo/3"; });
 }
 
-function atualizarHP(novoHP) {
+function atualizarHP(novoHP, hpMax) {
     const barra = document.getElementById("barra-hp");
     const textoHP = document.getElementById("texto-hp");
 
+    const porcentagem = (novoHP / hpMax) * 100;
+
     if (barra) {
-        barra.style.width = novoHP + "%";
+        barra.style.width = porcentagem + "%";
     }
 
     if (textoHP) {
-        textoHP.textContent = `${novoHP}/100`;
+        textoHP.textContent = `${novoHP}/${hpMax}`;
+    }
+}
+
+function sincronizarPersonagem(data) {
+    if (data.hp !== undefined) {
+        atualizarHP(data.hp, data.hp_max);
     }
 }
 

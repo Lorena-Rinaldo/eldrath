@@ -53,44 +53,47 @@
                     class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-red-400 font-fantasy">
                     <span>❤️ Vitalidade</span>
                     <span id="texto-hp">
-                        {{ session.personagem.hp }}/100
+                        {{ session.personagem.hp }}/{{ session.personagem.hp_max }}
                     </span>
                 </div>
-                <div class="w-full bg-gray-900 rounded-full h-2 overflow-hidden border border-white/5">
-                    <div class="bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500"
-                        style="width: {{ session.personagem.hp }}%"></div>
-                </div>
-            </div>
+                <div id="barra-hp" class="w-full bg-gray-900 rounded-full h-2 overflow-hidden border border-white/5">
+                    <div class="w-full bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500" {% set
+                        hp=session['personagem'].get('hp', 0) %} {% set hp_max=session['personagem'].get('hp_max', 1) %}
+                        style="width: {{ (hp / hp_max) * 100 }}%" </div>
+                    </div>
 
-            <!-- Atributos -->
-            <div class="flex items-center gap-3 px-2 border-l border-white/10">
-                <span class="text-xl">⚔️</span>
-                <div>
-                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Ataque</p>
-                    <p class="font-fantasy text-purple-300 text-sm">{{ session.personagem.ataque if
-                        session.personagem.ataque else "0" }}</p>
-                </div>
-            </div>
+                    <!-- Atributos -->
+                    <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                        <span class="text-xl">⚔️</span>
+                        <div>
+                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Ataque
+                            </p>
+                            <p class="font-fantasy text-purple-300 text-sm">{{ session.personagem.ataque if
+                                session.personagem.ataque else "0" }}</p>
+                        </div>
+                    </div>
 
-            <div class="flex items-center gap-3 px-2 border-l border-white/10">
-                <span class="text-xl">🛡️</span>
-                <div>
-                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Defesa</p>
-                    <p class="font-fantasy text-blue-300 text-sm">{{ session.personagem.defesa if
-                        session.personagem.defesa else "0" }}</p>
-                </div>
-            </div>
+                    <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                        <span class="text-xl">🛡️</span>
+                        <div>
+                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Defesa
+                            </p>
+                            <p class="font-fantasy text-blue-300 text-sm">{{ session.personagem.defesa if
+                                session.personagem.defesa else "0" }}</p>
+                        </div>
+                    </div>
 
-            <div class="flex items-center gap-3 px-2 border-l border-white/10 truncate">
-                <span class="text-xl">🗡️</span>
-                <div class="truncate">
-                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Equipamento
-                    </p>
-                    <p class="font-fantasy text-amber-400 truncate text-xs">
-                        {{ session.personagem.arma if session.personagem.arma else "Nenhum" }}
-                    </p>
-                </div>
-            </div>
+                    <div class="flex items-center gap-3 px-2 border-l border-white/10 truncate">
+                        <span class="text-xl">🗡️</span>
+                        <div class="truncate">
+                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">
+                                Equipamento
+                            </p>
+                            <p class="font-fantasy text-amber-400 truncate text-xs">
+                                {{ session.personagem.arma if session.personagem.arma else "Nenhum" }}
+                            </p>
+                        </div>
+                    </div>
         </header>
 
         <!-- CONTAINER PRINCIPAL -->
@@ -113,8 +116,8 @@
                         <p class="capitular">Desde que o Coração Arcano se partiu, sua vida nunca mais foi a mesma.
                             Vilas desapareceram sob a névoa, estradas tornaram-se trilhas de perigo e o próprio ar vibra
                             com magia instável.</p>
-                        <p>Você não é um herói lendário — <span
-                                class="text-purple-400 italic font-semibold">ainda</span>. É apenas alguém tentando
+                        <p>Você não é um herói lendário — <span class="text-white italic font-semibold">ainda</span>. É
+                            apenas alguém tentando
                             sobreviver em um mundo onde os fragmentos espalhados prometem poder… ou destruição absoluta.
                         </p>
                         <div
