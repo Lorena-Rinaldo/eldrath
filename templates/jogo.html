@@ -52,7 +52,9 @@
                 <div
                     class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-red-400 font-fantasy">
                     <span>❤️ Vitalidade</span>
-                    <span>{{ session.personagem.hp }}/100</span>
+                    <span id="texto-hp">
+                        {{ session.personagem.hp }}/100
+                    </span>
                 </div>
                 <div class="w-full bg-gray-900 rounded-full h-2 overflow-hidden border border-white/5">
                     <div class="bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500"

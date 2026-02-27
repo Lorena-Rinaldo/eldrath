@@ -89,9 +89,11 @@ def pegar_monstro():
         print(f"Erro ao buscar  monstro: {e}")
         return None
 
+
 # =========================
 # Rotas
 # =========================
+
 
 @app.route("/")
 def home():
@@ -110,12 +112,15 @@ def cenas(cena):
     if "personagem" not in session or "ataque" not in session["personagem"]:
         session["personagem"] = criar_personagem_padrao()
 
+    monstro = session.get("monstro")
+
     if (
-        "monstro" not in session
-        or isinstance(session["monstro"].get("type"), str)
-        and session["monstro"]["type"].islower()
+        not monstro
+        or not isinstance(monstro, dict)
+        or (isinstance(monstro.get("type"), str) and monstro["type"].islower())
     ):
         session["monstro"] = pegar_monstro()
+        monstro = session["monstro"]
 
     return render_template("jogo.html", cena=cena, monstro=session["monstro"])
 
@@ -150,6 +155,32 @@ def fugir():
         session["personagem"]["hp"] -= 5
 
     return {"dado": dado, "sucesso": sucesso, "hp": session["personagem"]["hp"]}
+
+
+@app.route("/api/ataque-monstro", methods=["POST"])
+def ataque_monstro():
+    if "personagem" not in session:
+        session["personagem"] = criar_personagem_padrao()
+
+    personagem = session["personagem"]
+
+    dado = random.randint(1, 20)
+    acertou = dado >= personagem["defesa"]
+
+    dano = random.randint(3, 8) if acertou else 0
+
+    if acertou:
+        personagem["hp"] -= dano
+        personagem["hp"] = max(personagem["hp"], 0)
+
+    session["personagem"] = personagem
+
+    return {
+        "dado": dado,
+        "acertou": acertou,
+        "dano": dano,
+        "hp": personagem["hp"],
+    }
 
 
 # =========================

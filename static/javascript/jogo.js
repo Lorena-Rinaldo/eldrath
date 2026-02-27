@@ -20,7 +20,16 @@ function tentarFugir() {
             .then(data => {
                 const msg = document.getElementById("mensagemResultado");
                 document.getElementById("valor-dado").textContent = data.dado;
-                msg.textContent = data.sucesso ? "🏃 Escapou!" : "💥 Falhou! HP: " + data.hp;
+
+                // ⭐ AQUI — logo após receber os dados
+                if (!data.sucesso && data.hp !== undefined) {
+                    atualizarHP(data.hp);
+                }
+
+                msg.textContent = data.sucesso
+                    ? "🏃 Escapou!"
+                    : "💥 Falhou! HP: " + data.hp;
+
                 document.getElementById("telaResultado").classList.remove("hidden");
             });
     });
@@ -31,7 +40,19 @@ function equiparArma() {
         .then(() => { window.location.href = "/jogo/3"; });
 }
 
-// Lógica para cena 4 (Combate automático)
+function atualizarHP(novoHP) {
+    const barra = document.getElementById("barra-hp");
+    const textoHP = document.getElementById("texto-hp");
+
+    if (barra) {
+        barra.style.width = novoHP + "%";
+    }
+
+    if (textoHP) {
+        textoHP.textContent = `${novoHP}/100`;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof cenaAtual !== 'undefined' && cenaAtual === 4) {
         animarDado(() => {
