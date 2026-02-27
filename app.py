@@ -125,6 +125,11 @@ def home():
     return render_template("index.html")
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("erro404.html"), 404
+
+
 @app.route("/jogo")
 def jogo():
     if "personagem" not in session:
