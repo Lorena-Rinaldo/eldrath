@@ -87,7 +87,7 @@
         <!-- SEÇÃO LORE (TEXTO QUEBRADO EM BLOCOS) -->
         <section id="lore" class="py-24 px-6 md:px-12 lg:px-24 max-w-5xl mx-auto space-y-24">
 
-            <!-- Bloco 1 -->
+            <!-- Bloco 1: O Amanhecer de Cristal -->
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
                     <h3 class="text-3xl font-fantasy text-purple-300">O Amanhecer de Cristal</h3>
@@ -97,25 +97,29 @@
                         As cidades brilhavam com torres de cristal vivo, alimentadas por correntes de magia pura.
                     </p>
                 </div>
+                <!-- CONTAINER DA IMAGEM CORRIGIDO -->
                 <div class="rounded-2xl border border-white/10 p-2 bg-white/5">
-                    <div class="bg-gray-800 h-64 rounded-xl flex items-center justify-center italic text-gray-500">
-                        <img src="../static/images/cidade_cristal.png" alt="Arte Conceitual: A Cidade de Cristal">
+                    <div class="relative w-full h-64 md:h-80 overflow-hidden rounded-xl bg-gray-900">
+                        <img src="../static/images/cidade_cristal.png" alt="Arte Conceitual: A Cidade de Cristal"
+                            class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-110">
                     </div>
                 </div>
             </div>
 
-            <!-- Bloco 2 - Citacão Central -->
+            <!-- Bloco 2 - Citação Central (Mantido) -->
             <div class="text-center py-12 border-y border-purple-500/20">
                 <blockquote class="text-2xl md:text-4xl font-fantasy italic text-white/90">
                     "Mas o poder que une também pode dividir."
                 </blockquote>
             </div>
 
-            <!-- Bloco 3 -->
+            <!-- Bloco 3: A Grande Ruptura -->
             <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- CONTAINER DA IMAGEM CORRIGIDO (com md:order-1 para manter o layout reverso) -->
                 <div class="rounded-2xl border border-white/10 p-2 bg-white/5 md:order-1">
-                    <div class="bg-gray-800 h-64 rounded-xl flex items-center justify-center italic text-gray-500">
-                        <img src="../static/images/caos_arcano.png" alt="Arte Conceitual: O Caos Arcano">
+                    <div class="relative w-full h-64 md:h-80 overflow-hidden rounded-xl bg-gray-900">
+                        <img src="../static/images/caos_arcano.png" alt="Arte Conceitual: O Caos Arcano"
+                            class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-110">
                     </div>
                 </div>
                 <div class="space-y-6 md:order-2">
