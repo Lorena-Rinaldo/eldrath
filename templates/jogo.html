@@ -42,12 +42,31 @@
 <body
     class="bg-[#0f0c1d] text-gray-200 min-h-screen flex items-center justify-center p-4 sm:p-8 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-[#1e1b4b] via-[#0f0c1d] to-[#020617]">
 
-    <div class="w-full max-w-4xl mx-auto space-y-6">
+    <!-- BOTÃO VOLTAR PARA HOME -->
+    <a href="{{ url_for('home') }}"
+        class="fixed top-4 left-4 md:top-6 md:left-6 z-50 group flex items-center gap-3 transition-all duration-300">
+        <div
+            class="p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 group-hover:border-purple-500/50 group-hover:bg-purple-600/20 shadow-2xl transition-all">
+            <svg class="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                </path>
+            </svg>
+        </div>
+        <span
+            class="font-fantasy text-[10px] uppercase tracking-[0.3em] text-gray-400 group-hover:text-purple-400 opacity-0 group-hover:opacity-100 transition-all transform -translate-x-2 group-hover:translate-x-0 hidden md:block">
+            Abandonar Jornada
+        </span>
+    </a>
+
+
+    <div class="w-full max-w-4xl mx-auto space-y-6 mt-12 md:mt-0">
 
         <!-- HUD / STATUS BAR (ESTILO REFINADO) -->
         <header
-            class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-2xl">
-            <!-- HP -->
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-2xl">
+
+            <!-- HP (Coluna 1) -->
             <div class="space-y-1">
                 <div
                     class="flex justify-between text-[10px] font-bold uppercase tracking-widest text-red-400 font-fantasy">
@@ -57,43 +76,47 @@
                     </span>
                 </div>
                 <div id="barra-hp" class="w-full bg-gray-900 rounded-full h-2 overflow-hidden border border-white/5">
-                    <div class="w-full bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500" {% set
-                        hp=session['personagem'].get('hp', 0) %} {% set hp_max=session['personagem'].get('hp_max', 1) %}
-                        style="width: {{ (hp / hp_max) * 100 }}%" </div>
+                    {% set hp = session['personagem'].get('hp', 0) %}
+                    {% set hp_max = session['personagem'].get('hp_max', 1) %}
+                    <div class="bg-gradient-to-r from-red-600 to-orange-500 h-full transition-all duration-500"
+                        style="width: {{ (hp / hp_max) * 100 }}%">
                     </div>
+                </div>
+            </div>
 
-                    <!-- Atributos -->
-                    <div class="flex items-center gap-3 px-2 border-l border-white/10">
-                        <span class="text-xl">⚔️</span>
-                        <div>
-                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Ataque
-                            </p>
-                            <p class="font-fantasy text-purple-300 text-sm">{{ session.personagem.ataque if
-                                session.personagem.ataque else "0" }}</p>
-                        </div>
-                    </div>
+            <!-- Ataque (Coluna 2) -->
+            <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                <span class="text-xl">⚔️</span>
+                <div>
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Ataque</p>
+                    <p class="font-fantasy text-purple-300 text-sm">
+                        {{ session.personagem.ataque if session.personagem.ataque else "0" }}
+                    </p>
+                </div>
+            </div>
 
-                    <div class="flex items-center gap-3 px-2 border-l border-white/10">
-                        <span class="text-xl">🛡️</span>
-                        <div>
-                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Defesa
-                            </p>
-                            <p class="font-fantasy text-blue-300 text-sm">{{ session.personagem.defesa if
-                                session.personagem.defesa else "0" }}</p>
-                        </div>
-                    </div>
+            <!-- Defesa (Coluna 3) -->
+            <div class="flex items-center gap-3 px-2 border-l border-white/10">
+                <span class="text-xl">🛡️</span>
+                <div>
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Defesa</p>
+                    <p class="font-fantasy text-blue-300 text-sm">
+                        {{ session.personagem.defesa if session.personagem.defesa else "0" }}
+                    </p>
+                </div>
+            </div>
 
-                    <div class="flex items-center gap-3 px-2 border-l border-white/10 truncate">
-                        <span class="text-xl">🗡️</span>
-                        <div class="truncate">
-                            <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">
-                                Equipamento
-                            </p>
-                            <p class="font-fantasy text-amber-400 truncate text-xs">
-                                {{ session.personagem.arma if session.personagem.arma else "Nenhum" }}
-                            </p>
-                        </div>
-                    </div>
+            <!-- Equipamento (Coluna 4) -->
+            <div class="flex items-center gap-3 px-2 border-l border-white/10 truncate">
+                <span class="text-xl">🗡️</span>
+                <div class="truncate">
+                    <p class="text-[9px] uppercase text-gray-500 font-bold font-fantasy tracking-tighter">Equipamento
+                    </p>
+                    <p class="font-fantasy text-amber-400 truncate text-xs">
+                        {{ session.personagem.arma if session.personagem.arma else "Nenhum" }}
+                    </p>
+                </div>
+            </div>
         </header>
 
         <!-- CONTAINER PRINCIPAL -->
